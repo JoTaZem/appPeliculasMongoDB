@@ -1,20 +1,9 @@
-from flask import Flask
-from flask_mongoengine import MongoEngine
-from dotenv import load_dotenv
-import os
-load_dotenv()
+from __init__ import *
 
-app = Flask(__name__)
 
-app.config[ 'UPLOAD_FONDER'] = './static/images/'
-app.config['MONGODB_SETTINGS'] =[
-    {
-        'db': 'peliculasMongoDB',
-        'host': os.environ.get('URI')  # Use the URI from the .env file
-        #'port': 27017
-    }
-]
+app = create_app()
 db = MongoEngine(app)
+
 @app.route("/", methods=["GET"])
 def index():
     return "bienvenido a la API de peliculas"
@@ -23,4 +12,4 @@ def index():
 if __name__ == '__main__':
     from routes.genero import *
     from routes.pelicula import * 
-    app.run(debug=True,port=5000,host='0.0.0.0')
+    app.run(debug=True,host='0.0.0.0')
