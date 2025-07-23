@@ -15,6 +15,10 @@ app.config['MONGODB_SETTINGS'] =[
     }
 ]
 db = MongoEngine(app)
+@app.route("/", methods=["GET"])
+def index():
+    return "bienvenido a la API de peliculas"
+
 
 if __name__ == '__main__':
     from routes.genero import *
